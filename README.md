@@ -5,7 +5,7 @@
 [![Python Versions](https://img.shields.io/badge/python-3.3%2C%203.4%2C%203.5%2C%203.6-blue.svg)](https://www.python.org)
 
 ## What is AutoRecorder?
-松江高専で行われた大おもちゃ大会のプログラム。
+[松江高専](http://www.matsue-ct.ac.jp "松江高専")で行われた大おもちゃ大会のプログラム。
 自動演奏のリコーダーだお。
 
 ## Install

@@ -1,0 +1,39 @@
+language: python
+sudo: false
+
+# Add or remove version for match with Travis support
+python:
+    - 3.5
+os:
+  - linux
+
+matrix:
+  fast_finish: true
+  include:
+    - env: ENV=lint
+      python: 3.5
+      before_script: TOX_ENV=lint
+    - env: ENV=pylint
+      python: 3.5
+      before_script: TOX_ENV=pylint
+    - env: ENV=coverage
+      python: 3.5
+      before_script: TOX_ENV=coverage
+
+  # For now allow failures of all the builds which use lxml
+  allow_failures:
+    - env: ENV=coverage
+
+install:
+  - pip install --upgrade "pip<8.0.0"
+  - pip install "virtualenv<14.0.0"
+  - pip install "tox>=2.3.0,<2.4"
+  - TOX_ENV=py$TRAVIS_PYTHON_VERSION
+
+script:
+  - tox -e $TOX_ENV
+
+cache:
+  apt: true
+  directories:
+    - $HOME/.cache/pip # pip cache

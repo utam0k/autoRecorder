@@ -3,7 +3,10 @@ sudo: false
 
 # Add or remove version for match with Travis support
 python:
+    - 3.3
+    - 3.4
     - 3.5
+    - 3.6
 os:
     - linux
 

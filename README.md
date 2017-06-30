@@ -8,6 +8,9 @@
 [松江高専](http://www.matsue-ct.ac.jp "松江高専")で行われた大おもちゃ大会のプログラム。
 自動演奏のリコーダーだお。
 
+## DEMO
+成功したらここになにかを載せたり載せなかったり
+
 ## Install
 ```
 pip install -r requirements.txt

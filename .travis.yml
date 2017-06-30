@@ -5,7 +5,7 @@ sudo: false
 python:
     - 3.5
 os:
-  - linux
+    - linux
 
 matrix:
   fast_finish: true
@@ -37,3 +37,7 @@ cache:
   apt: true
   directories:
     - $HOME/.cache/pip # pip cache
+
+notifications:
+  slack:
+    secure: nEFajD5s704mCnfCklVZvAB0VqGBx/MqljWUSrJ3GYQYobs2Ao2EYqPgVHxZUhwlVHJ/I/ZTuiMx/iTrUIMLNFhM8MZRSmkULRCYBCvrDNwl7goI41OR4skpwphI/yKN067Y0v4SNB3meIgDFi72BbvIHVWLf3cnvsFlmbhLkRTZisoVWWbkkhGFS45CUhbkpjn5Dez71irvvQvR0LipUD/Idlbvh3vExPAxTMMnJheMnMJ/IMe4WDD79wzmAxF4UB7XQ2oY1fQ/M4/4LKJnRmH9wqTy0+z1/vajuzaQ3v1wtBqIMyDpXoDxJ63GtldPCuR0bsaiT6oAffHWw1yfH69er5BzpbC9x93RETwdWk71YjirKDwQiuAoOazt+BZEuuImoZdMLu6nQ/3z+uuAK60kzOz5ZUpjrpU3tVoB42/VONKC/wquiXtvr+JZpiCwExW3MEtJ+3NbsoR+18Y3Q1ijo39ozI6ibM4mVVztlnIOevPjjh5B91LN401qAmQ+zprSh5nSHDD+Vk/4AKAgsV4i5k9Mb8rMJDEGPKj8gVQBU2pWVk9Kzp616siFMVBUrqckELoncH/D51JdqlOoVlTd9xlqXIAV+wWD3g6wNzJ1WblN32DzgF/JmAjcqzkEjVHCNcA13yJAUptVPjx8E3EudxiSyWuCZJuTKgyRb7M=

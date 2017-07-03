@@ -1,5 +1,3 @@
-from pprint import pprint as print
-
 from client.parse import parse
 
 

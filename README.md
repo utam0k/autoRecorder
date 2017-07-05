@@ -25,7 +25,7 @@ python setup.py test
 
 ## Development
 ```
-ln -s contrib/pre-commit.sh .git/hooks/pre-commit
+cp contrib/pre-commit.sh .git/hooks/pre-commit
 ```
 
 ## License

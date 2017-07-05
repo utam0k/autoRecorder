@@ -1,4 +1,4 @@
-# !/bin/sh
+#!/usr/bin/env bash
 
 files=$(git diff --cached --name-status | grep -v ^D | awk '$1 $2 { print $2}' | grep -e .py$)
 array=(${files/// })

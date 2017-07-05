@@ -23,12 +23,12 @@ class SenderTest(unittest.TestCase):
         eq_(self.sock.close.call_count, 1)
 
     def test_send_bytes(self):
-        data = bytes('aaaa', 'utf-8')
+        data = 'aaaa'.encode('utf-8')
         length = '{0:010d}'.format(len(data))
         sender.send(HOST, PORT, data, self.sock)
 
         send_data = self.sock.send.call_args[0][0]
-        tmp = bytes(length, 'utf-8') + data
+        tmp = length.encode('utf-8') + data
         eq_(send_data, tmp)
 
     def test_send_str(self):

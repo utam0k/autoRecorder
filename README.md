@@ -23,5 +23,10 @@ pip install -r requirements-test.txt
 python setup.py test
 ```
 
+## Development
+```
+ln -s contrib/pre-commit.sh .git/hooks/pre-commit
+```
+
 ## License
 [MIT](https://github.com/utam0k/autoRecorder/blob/master/LICENSE.txt)

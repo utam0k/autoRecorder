@@ -20,7 +20,7 @@ setup(name='autoRecorder',
       tests_require=TEST_REQUIREMENTS,
       entry_points="""
         [console_scripts]
-        ATclient = client.main:main
-        ATserver = server.main:main
+        ARclient = client.main:main
+        ARserver = server.main:main
         """,
       )

@@ -1,45 +1,50 @@
 import unittest
-import threading
+from mock import Mock
 
 from nose.tools import eq_
 
 from client import sender
-from client.config import CONF
-
-if CONF['py_3']:
-    import socketserver
-else:
-    import SocketServer as socketserver
 
 
 HOST, PORT = 'localhost', 5555
-recv_data = None
-
-
-class DummyServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
-    allow_reuse_address = True
-
-
-class DummyHandler(socketserver.BaseRequestHandler):
-
-    def handle(self):
-        global recv_data
-        length = int(self.request.recv(10).strip().decode('utf-8'))
-        recv_data = self.request.recv(length).strip().decode('utf-8')
 
 
 class SenderTest(unittest.TestCase):
 
     def setUp(self):
-        self.server = DummyServer((HOST, PORT), DummyHandler)
-        self.server_thread = threading.Thread(target=self.server.serve_forever)
-        self.server_thread.setDaemon(True)
-        self.server_thread.start()
+        self.sock = Mock()
+        self.sock.connect.return_value = None
+        self.sock.send.return_value = None
+        self.sock.close.return_value = None
 
     def tearDown(self):
-        self.server.shutdown()
+        eq_(self.sock.send.call_count, 1)
+        eq_(self.sock.connect.call_count, 1)
+        eq_(self.sock.close.call_count, 1)
 
-    def test_send_string(self):
+    def test_send_bytes(self):
+        data = bytes('aaaa', 'utf-8')
+        length = '{0:010d}'.format(len(data))
+        sender.send(HOST, PORT, data, self.sock)
+
+        send_data = self.sock.send.call_args[0][0]
+        tmp = bytes(length, 'utf-8') + data
+        eq_(send_data, tmp)
+
+    def test_send_str(self):
         data = 'aaaa'
-        recv = sender.send(HOST, PORT, data)
-        eq_(recv_data, recv)
+        length = '{0:010d}'.format(len(data))
+        sender.send(HOST, PORT, data, self.sock)
+
+        send_data = self.sock.send.call_args[0][0]
+        tmp = length + data
+        eq_(send_data, tmp.encode('utf-8'))
+
+    def test_send_list(self):
+        data = [1, 2, 3, 4]
+        length = '{0:010d}'.format(len(str(data)))
+        sender.send(HOST, PORT, data, self.sock)
+
+        send_data = self.sock.send.call_args[0][0]
+        tmp = length + str(data)
+        eq_(send_data, tmp.encode('utf-8'))

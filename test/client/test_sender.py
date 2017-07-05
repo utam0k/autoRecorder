@@ -1,14 +1,20 @@
 import unittest
 import threading
-import socketserver
 
 from nose.tools import eq_
 
 from client import sender
+from client.config import CONF
+
+if CONF['py_3']:
+    import socketserver
+else:
+    import SocketServer as socketserver
 
 
 HOST, PORT = 'localhost', 5555
 recv_data = None
+
 
 class DummyServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
     allow_reuse_address = True
@@ -17,6 +23,7 @@ class DummyServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
 class DummyHandler(socketserver.BaseRequestHandler):
 
     def handle(self):
+        global recv_data
         length = int(self.request.recv(10).strip().decode('utf-8'))
         recv_data = self.request.recv(length).strip().decode('utf-8')
 

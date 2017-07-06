@@ -1,0 +1,7 @@
+[CLIENT]
+DestAddr=localhost
+DestPort=5555
+MucsicXmlPath=path/to/musicxml/
+[SERVER]
+Addr=localhost
+Port=5555

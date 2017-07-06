@@ -5,16 +5,17 @@ import json
 
 from nose.tools import eq_
 
-from client.config import CONF
+from client import config
 from client.main import main
 
-if CONF['py_3']:
+if config.py_3:
     import socketserver
 else:
     import SocketServer as socketserver
 
 
-HOST, PORT = 'localhost', 5555
+CONF = config.CONF
+HOST, PORT = CONF['dest_addr'], int(CONF['dest_port'])
 
 
 class DummyServer(socketserver.ThreadingMixIn, socketserver.TCPServer):

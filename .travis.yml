@@ -35,6 +35,7 @@ install:
   - TOX_ENV=py$TRAVIS_PYTHON_VERSION
 
 script:
+  - cp test/config.ini config.ini
   - tox -e $TOX_ENV
 
 cache:

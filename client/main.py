@@ -2,14 +2,12 @@ import json
 
 from client.parse import parse
 from client import sender
-
-
-HOST, PORT = 'localhost', 5555
+from client.config import CONF
 
 
 def main():
-    data = parse('./test/data/example.xml')
-    sender.send(HOST, PORT, json.dumps(data))
+    data = parse(CONF['mucsic_xml_path'])
+    sender.send(CONF['dest_addr'], int(CONF['dest_port']), json.dumps(data))
 
 if __name__ == '__main__':
     main()

@@ -12,7 +12,7 @@ CONF.read('./config.ini')
 
 if py_3:
     CONF = CONF['SERVER']
-else:
+else:  # pragma: no cover
     tmp = CONF.items('SERVER')
     CONF = {}
     for key, value in tmp:

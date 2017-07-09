@@ -22,5 +22,6 @@ setup(name='autoRecorder',
         [console_scripts]
         ARclient = client.main:main
         ARserver = server.main:main
+        ARcntl = server.control:main
         """,
       )

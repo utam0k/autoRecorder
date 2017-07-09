@@ -1,10 +1,14 @@
-from socketserver import BaseRequestHandler
+import time
 
-from server import control
+from server import receive_server
+from server.config import CONF
 
 
-class TCPHandler(BaseRequestHandler):
+def main():
+    receive_server.start(CONF['addr'], int(CONF['port']))
+    while True:
+        time.sleep(10)
 
-    def handle(self):
-        self.data = self.request.recv(1024).strip()
-        control.run(self.data)
+
+if __name__ == '__main__':
+    main()

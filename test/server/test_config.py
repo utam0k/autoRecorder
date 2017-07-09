@@ -12,12 +12,12 @@ class ConfigTest(unittest.TestCase):
     @utils.py_3_only
     def test_CONF_keys_3(self):
         keys = list(config.CONF.keys())
-        eq_(keys, ['addr', 'port'])
+        eq_(keys, ['addr', 'port', 'pickle_path'])
 
     @utils.py_2_only
     def test_CONF_keys_2(self):
         keys = list(config.CONF.keys())
-        expect_keys = ['addr', 'port']
+        expect_keys = ['addr', 'port', 'pickle_path']
         for key in keys:
             ok_(key in expect_keys)
 

@@ -15,6 +15,7 @@
 ```
 pip install -r requirements.txt
 python setup.py install
+cp config.ini.example config.ini # You should edit config file.
 ```
 
 ## Test

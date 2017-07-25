@@ -10,14 +10,12 @@ def parse(path):
     tree = ET.parse(path)
     root = tree.getroot()
 
-    except_tags = ['attributes', 'print', 'barline']
-
     for measure in root.findall('./part/'):
         measure_l = []
         all_l.append(measure_l)
 
         for note in measure:
-            if note.tag in except_tags:
+            if note.tag != 'note':
                 continue
 
             note_d = {}

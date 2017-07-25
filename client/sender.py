@@ -13,11 +13,12 @@ def send(host, port, data, sock=None, proto='tcp'):
     length = '{0:010d}'.format(len(data))
     tmp = length.encode('utf-8') + data
 
-    if proto == 'tcp' or isinstance(sock, socket.socket):
+    if proto == 'tcp':
         sock = sock or socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.connect((host, port))
+        sock.connect((host, int(port)))
         send_f = sock.send
-    elif proto == 'serial' or isinstance(sock, serial.Serial):
+    elif proto == 'serial':
+        print('serial')
         sock = sock or serial.Serial(port=port)
         send_f = sock.write
     else:

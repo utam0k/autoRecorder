@@ -1,4 +1,5 @@
 import unittest
+import socket
 from mock import Mock
 
 from nose.tools import eq_
@@ -12,7 +13,7 @@ HOST, PORT = 'localhost', 5555
 class SenderTest(unittest.TestCase):
 
     def setUp(self):
-        self.sock = Mock()
+        self.sock = Mock(spec=socket.socket)
         self.sock.connect.return_value = None
         self.sock.send.return_value = None
         self.sock.close.return_value = None

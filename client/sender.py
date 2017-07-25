@@ -1,15 +1,27 @@
 import socket
 
+import serial
 
-def send(host, port, data, sock=None):
+
+def send(host, port, data, sock=None, proto='tcp'):
     if type(data) is not bytes:
         try:
             data = str(data).encode('utf-8')
         except ValueError:
             raise ValueError('encoding error')
-    sock = sock or socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
     length = '{0:010d}'.format(len(data))
-    sock.connect((host, port))
     tmp = length.encode('utf-8') + data
-    sock.send(tmp)
+
+    if proto == 'tcp' or isinstance(sock, socket.socket):
+        sock = sock or socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((host, port))
+        send_f = sock.send
+    elif proto == 'serial' or isinstance(sock, serial.Serial):
+        sock = sock or serial.Serial(port=port)
+        send_f = sock.write
+    else:
+        raise TypeError('sock type is %s' % (type(sock)))
+
+    send_f(tmp)
     sock.close()
